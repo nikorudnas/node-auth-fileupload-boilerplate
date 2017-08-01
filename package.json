@@ -1,0 +1,26 @@
+{
+  "name": "node-auth-fileupload-boilerplate",
+  "version": "0.1.0",
+  "private": false,
+  "license": "GPL-3.0",
+  "description": "Boilerplate for node-auth-fileupload apps with mongodb",
+  "author": "Niko Rudnäs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0"
+  }
+}
