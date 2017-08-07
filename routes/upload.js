@@ -49,22 +49,28 @@ module.exports = (function () {
                 });
             }
         });
-        upload(req, res, function (err) {
-            if (err) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'File is too large. (Max 2MB)'
-                });
-            }
-
-            var file = req.file;
-            var base64str = base64_encode('./uploads/' + file.originalname);
-
-            return res.status(200).json({
-                success: true,
-                url: 'http://' + ip.address() + ':' + constants.PORT + '/api/uploads/' + file.originalname,
-                image: 'data:image/png;base64,' + base64str
+        new Promise((resolve, reject) => {
+            upload(req, res, function (err) {
+                if (err) {
+                    reject(err);
+                    return res.status(404).json({
+                        success: false,
+                        message: 'File is too large. (Max 2MB)'
+                    });
+                }
+                resolve(req);
             });
+        }).then(() => {
+            setTimeout(function () {
+                var file = req.file;
+                var base64str = base64_encode('./uploads/' + file.originalname);
+
+                return res.status(200).json({
+                    success: true,
+                    url: 'http://' + ip.address() + ':' + constants.PORT + '/api/uploads/' + file.originalname,
+                    image: 'data:image/png;base64,' + base64str
+                });
+            }, 500);
         });
     });
 
